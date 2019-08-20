@@ -1,0 +1,103 @@
+In response to Yasmeen Tabasum(yasmeen@techmatic.info) of Techmatic, Inc.
+request for sample code to perform the following:
+
+	1. Given two lists, write a function that answers if all elements of
+	   one list are contained in the other list.
+
+	2. For a single-linked list (forward only), write a function that
+	   returns 5th element from the end of the list. The list can only be
+	   walked once (reverse, length, or size of this list cannot be used).
+
+	3. Write a function that takes three sides of a triangle and answers
+	   if it's equilateral, isosceles, or scalene."
+
+
+The "sample" package includes golang code to implement and test each function,
+namely "contain," "position," and "triangle."  For example, to strictly test the
+package from $GOPATH/src:
+
+	$ go test -cover sample
+	ok      sample  0.030s  coverage: 97.9% of statements
+
+If the gotests fail, error messages will be output instead.  Also the -v flag
+will print verbose output for each test case.
+
+To test just one of the functions, say "triangle," specify the function and the
+test code as follows:
+
+	$ go test -v -cover sample/triangle_test.go sample/triangle.go
+	=== RUN   TestTriangle
+	Triangle( 5 , 4 , 3 ) is Scalene
+	Triangle( 8 , 10 , 8 ) is Isosceles
+	Triangle( 8 , 8 , 8 ) is Equalateral
+	Triangle( 8 , 8 , 16 ) is Invalid
+	Triangle( 20 , 8 , 10 ) is Invalid
+	Triangle( 8 , 18 , 7 ) is Invalid
+	--- PASS: TestTriangle (0.00s)
+	PASS
+	coverage: 100.0% of statements
+	ok      command-line-arguments  0.034s  coverage: 100.0% of statements
+
+Note that additional code was added to "triangle" to handle sides that cannot
+form a triangle.  For "position," the code was generalized to handle the nth
+position from the end of a single-linked list.
+
+--
+
+And for the sake of completeness, here is the godoc output:
+
+PACKAGE DOCUMENTATION
+
+package sample
+    import "sample"
+
+    "Given two lists, write a function that answers if all elements of one
+    list are contained in the other list."
+
+    See Contains() that operates on heterogeneous lists
+
+    "For a single-linked list (forward only), write a function that returns
+    5th element from the end of the list. The list can only be walked once
+    (reverse, length, or size of this list cannot be used)."
+
+    See PosFromEnd() that operates on LinkedList objects
+
+    "Write a function that takes three sides of a triangle and answers if
+    it's equilateral, isosceles, or scalene."
+
+    See func Shape() that operates on Triangle objects
+
+FUNCTIONS
+
+func Contains(a []interface{}, b []interface{}) bool
+    Compares lists looking for subset containment
+
+func (L *LinkedList) AppendList(value int)
+    Method to build the single-linked list
+
+func (L *LinkedList) PosFromEnd(pos uint) *Node
+    Nth node from the end of a single-linked list. The 0th element is nil.
+
+func (L *LinkedList) PrintList()
+    Method to print the single-linked list
+
+func (t Triangle) Shape() string
+    Method to identify a triangle as Equalateral, Isosceles, Scalene, or Invalid
+
+TYPES
+
+type LinkedList struct {
+    Head *Node
+}
+    Single-linked list object
+
+type Node struct {
+    Data int
+    Next *Node
+}
+    Individual element, or node, for a single-linked list
+
+type Triangle struct {
+    Side1, Side2, Side3 uint
+}
+    Data structure for the triangle
