@@ -11,10 +11,14 @@ request for sample code to perform the following:
 	3. Write a function that takes three sides of a triangle and answers
 	   if it's equilateral, isosceles, or scalene."
 
+To fetch a clone of the "sample" package, execute the following from your
+$GOPATH/src directory:
+
+	$ git clone https://github.com/rory911/sample
 
 The "sample" package includes golang code to implement and test each function,
-namely "contain," "position," and "triangle."  For example, to strictly test the
-package from $GOPATH/src:
+namely "contain," "position," and "triangle."  To test the entire package that
+was just cloned, from $GOPATH/src execute:
 
 	$ go test -cover sample
 	ok      sample  0.030s  coverage: 97.9% of statements
